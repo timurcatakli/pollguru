@@ -1,41 +1,9 @@
 import React, { Component } from 'react';
 
-export default class About extends Component {
+export default class Subpage extends Component {
   render() {
     return (
       <div>
-        <div className='intro' id='intro'>
-          <div className='main-slider'>
-            <div className='slider-item'>
-              <div className='container'>
-                <div className='row'>
-                  <div className='col-md-6 col-sm-12'>
-                    <div className='intro-preview'>
-                      <h2 className='intro-title'>Carabobo LP is<br />The Best Solution for You</h2>
-                      <div className='intro-text'>
-                        <p>
-                          Efficiently unleash cross-media information without
-                          cross-media value. Quickly maximize timely deliverables
-                          for real-time schemas. Dramatically maintain clicks-and-mortar
-                          solutions without functional solutions.
-                        </p>
-                      </div>
-                      <div className='for-btn'>
-                        <a href='#0' className='btn-site btn-color'>Download App</a>
-                      </div>
-                    </div>
-                  </div>
-                  <div className='col-md-6 hidden-sm hidden-xs'>
-                    <div className='image-wrapp aligncenter'>
-                      <img src='images/placeholder-445x860.png' alt='' title='' />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <div className='features anchor' id='features'>
           <div className='container'>
             <div className='row'>

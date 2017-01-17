@@ -49,7 +49,7 @@ ReactDOM.render(
       <Routes /> :
       <div>
         <Routes />
-        <DevTools />
+        {/* <DevTools /> */}
       </div> }
   </Provider>,
   document.getElementById('root')
