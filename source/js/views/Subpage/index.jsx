@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
+import React, { Component } from 'react'
 
 export default class Subpage extends Component {
   render() {
@@ -169,6 +168,6 @@ export default class Subpage extends Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
