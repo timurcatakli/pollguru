@@ -19,6 +19,8 @@ export default class Menu extends Component {
                   <li><Link to={ routeCodes.ABOUT }>About</Link></li>
                   <li><Link to={ routeCodes.SUBPAGE }>Subpage</Link></li>
                   <li><Link to='404'>404</Link></li>
+                  <li><Link to='login'>Login</Link></li>
+                  <li><Link to='register'>Register</Link></li>
                 </ul>
               </div>
               <div className='toggle-nav-wrapper floatright'>
