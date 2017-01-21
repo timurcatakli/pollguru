@@ -1,18 +1,18 @@
-const webpack = require('webpack');
-const path = require('path');
+const webpack = require('webpack')
+const path = require('path')
 
-const DashboardPlugin = require('webpack-dashboard/plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const autoprefixer = require('autoprefixer');
+const DashboardPlugin = require('webpack-dashboard/plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const autoprefixer = require('autoprefixer')
 
-const nodeEnv = process.env.NODE_ENV || 'development';
-const isProduction = nodeEnv === 'production';
+const nodeEnv = process.env.NODE_ENV || 'development'
+const isProduction = nodeEnv === 'production'
 
-const jsSourcePath = path.join(__dirname, './source/js');
-const buildPath = path.join(__dirname, './build');
-const imgPath = path.join(__dirname, './source/assets/img');
-const sourcePath = path.join(__dirname, './source');
+const jsSourcePath = path.join(__dirname, './source/js')
+const buildPath = path.join(__dirname, './build')
+const imgPath = path.join(__dirname, './source/assets/img')
+const sourcePath = path.join(__dirname, './source')
 
 // Common plugins
 const plugins = [
@@ -45,7 +45,7 @@ const plugins = [
       context: sourcePath,
     },
   }),
-];
+]
 
 // Common rules
 const rules = [
@@ -61,7 +61,7 @@ const rules = [
     include: imgPath,
     use: 'url-loader?limit=20480&name=assets/[name]-[hash].[ext]',
   },
-];
+]
 
 if (isProduction) {
   // Production plugins
@@ -88,7 +88,7 @@ if (isProduction) {
       },
     }),
     new ExtractTextPlugin('style-[hash].css')
-  );
+  )
 
   // Production rules
   rules.push(
@@ -99,13 +99,13 @@ if (isProduction) {
         loader: 'css-loader!postcss-loader!sass-loader',
       }),
     }
-  );
+  )
 } else {
   // Development plugins
   plugins.push(
     new webpack.HotModuleReplacementPlugin(),
     new DashboardPlugin()
-  );
+  )
 
   // Development rules
   rules.push(
@@ -124,12 +124,13 @@ if (isProduction) {
         'sass-loader?sourceMap',
       ],
     }
-  );
+  )
 }
 
 module.exports = {
   devtool: isProduction ? 'eval' : 'source-map',
   context: jsSourcePath,
+  performance: { hints: false },
   entry: {
     js: './index.js',
     vendor: [
@@ -178,10 +179,10 @@ module.exports = {
       publicPath: false,
       timings: true,
       version: false,
-      warnings: true,
+      warnings: false,
       colors: {
         green: '\u001b[32m',
       },
     },
   },
-};
+}

@@ -1,9 +1,38 @@
 import React, { Component } from 'react'
-import TextField from 'material-ui/TextField'
+import { Field, reduxForm } from 'redux-form'
+import { TextField } from 'redux-form-material-ui'
 import RaisedButton from 'material-ui/RaisedButton'
 import { Card, CardActions, CardTitle, CardText } from 'material-ui/Card'
 
-export default class Register extends Component {
+const validate = values => {
+  const errors = {}
+
+  if (!values.email) {
+    errors.email = 'Please enter an email.'
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    errors.email = 'Invalid email address'
+  }
+
+  if (!values.password) {
+    errors.password = 'Please enter a password.'
+  }
+
+  if (!values.passwordConfirmation) {
+    errors.passwordConfirmation = 'Please enter a password confirmation.'
+  }
+
+  if (values.password !== values.passwordConfirmation) {
+    errors.password = 'Passwords do not match'
+  }
+
+  return errors
+}
+
+export class Register extends Component {
+  handleFormSubmit = (values) => {
+    console.log(values)
+  }
+
   render() {
     return (
       <div>
@@ -14,23 +43,35 @@ export default class Register extends Component {
                 <Card>
                   <CardTitle title='REGISTER' />
                   <CardText>
-                    <TextField
-                      hintText='Enter your email'
-                      floatingLabelText='Email'
-                    />
-                    <br />
-                    <TextField
-                      hintText='Enter your password'
-                      floatingLabelText='Password'
-                    />
-                    <br />
-                    <TextField
-                      hintText='Repeat your password'
-                      floatingLabelText='Password Confirmation'
-                    />
+                    <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
+                      <Field
+                        name='email'
+                        id='login-form-email'
+                        hintText='Email'
+                        floatingLabelText='Enter your email'
+                        component={ TextField }
+                        // errorText={ this.props.errors.password }
+                      />
+                      <Field
+                        name='password'
+                        id='login-form-password'
+                        hintText='Password'
+                        floatingLabelText='Enter your password'
+                        type='password'
+                        component={ TextField }
+                      />
+                      <Field
+                        name='passwordConfirmation'
+                        id='login-form-password-confirmation'
+                        hintText='Confirm Password'
+                        floatingLabelText='Confirm your password'
+                        type='password'
+                        component={ TextField }
+                      />
+                    </form>
                   </CardText>
                   <CardActions>
-                    <RaisedButton label='Sign In' primary />
+                    <RaisedButton label='Sign in' onTouchTap={ this.props.handleSubmit(this.handleFormSubmit) } primary />
                   </CardActions>
                 </Card>
               </div>
@@ -41,3 +82,5 @@ export default class Register extends Component {
     )
   }
 }
+
+export default reduxForm({ form: 'register', validate })(Register)
