@@ -1,8 +1,15 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { Field, reduxForm } from 'redux-form'
+import { connect } from 'react-redux'
 import { TextField } from 'redux-form-material-ui'
-import RaisedButton from 'material-ui/RaisedButton'
 import { Card, CardActions, CardTitle, CardText } from 'material-ui/Card'
+import RaisedButton from 'material-ui/RaisedButton'
+import * as Actions from '../../actions/app'
+
+const propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  signInUser: PropTypes.func.isRequired,
+}
 
 const validate = values => {
   const errors = {}
@@ -22,7 +29,7 @@ const validate = values => {
 
 export class Login extends Component {
   handleFormSubmit = (values) => {
-    console.log(values)
+    this.props.signInUser(values)
   }
 
   render() {
@@ -35,7 +42,7 @@ export class Login extends Component {
                 <Card>
                   <CardTitle title='LOGIN' />
                   <CardText>
-                    <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
+                    <form onSubmit={ this.props.handleSubmit(this.handleFormSubmit) }>
                       <Field
                         name='email'
                         id='login-form-email'
@@ -44,6 +51,7 @@ export class Login extends Component {
                         component={ TextField }
                         // errorText={ this.props.errors.password }
                       />
+                      <br />
                       <Field
                         name='password'
                         id='login-form-password'
@@ -67,4 +75,5 @@ export class Login extends Component {
   }
 }
 
-export default reduxForm({ form: 'register', validate })(Login)
+Login.propTypes = propTypes
+export default connect(null, Actions)(reduxForm({ form: 'login', validate })(Login))
