@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { testAction, testAsync } from 'actions/app';
-import bookImg from '../../../assets/img/book2.jpg';
 
 @connect(state => ({
   asyncData: state.app.get('asyncData'),
@@ -76,7 +75,6 @@ export default class Dashboard extends Component {
           <div className='BackgroundImgExample' />
 
           <h3>Image imported to the component</h3>
-          <img src={ bookImg } alt='' className='ImgExample' />
         </div>
       </div>
     );
