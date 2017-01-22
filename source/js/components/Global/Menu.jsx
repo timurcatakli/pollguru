@@ -1,8 +1,25 @@
-import React, { Component } from 'react';
-import { IndexLink, Link } from 'react-router';
-import { routeCodes } from '../../routes';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { IndexLink, Link } from 'react-router'
+import { routeCodes } from '../../routes'
+import * as Actions from '../../actions/app'
 
-export default class Menu extends Component {
+export class Menu extends Component {
+  handleSignout() {
+    this.props.signOutUser()
+  }
+
+  renderAuthLinks() {
+    if (this.props.authenticated) {
+      return [
+        <li key={ 1 }><a className='nav-link' href='#' onClick={ () => this.handleSignout() }>Sign Out</a></li>
+      ]
+    }
+    return [
+      <li key={ 1 }><Link to={ routeCodes.LOGIN }>Login</Link></li>,
+      <li key={ 2 }><Link to={ routeCodes.REGISTER }>Register</Link></li>
+    ]
+  }
 
   render() {
     return (
@@ -19,8 +36,7 @@ export default class Menu extends Component {
                   <li><Link to={ routeCodes.ABOUT }>About</Link></li>
                   <li><Link to={ routeCodes.SUBPAGE }>Subpage</Link></li>
                   <li><Link to='404'>404</Link></li>
-                  <li><Link to='login'>Login</Link></li>
-                  <li><Link to='register'>Register</Link></li>
+                  {this.renderAuthLinks()}
                 </ul>
               </div>
               <div className='toggle-nav-wrapper floatright'>
@@ -30,6 +46,14 @@ export default class Menu extends Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    authenticated: state.auth.authenticated
+  }
+}
+
+export default connect(mapStateToProps, Actions)(Menu)

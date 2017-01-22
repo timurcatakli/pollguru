@@ -6,7 +6,6 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import 'babel-polyfill'
 import logger from 'dev/logger'
-
 import rootReducer from 'reducers'
 import Routes from 'routes'
 import injectTapEventPlugin from 'react-tap-event-plugin'
