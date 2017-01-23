@@ -6,6 +6,18 @@ import { browserHistory } from 'react-router'
 import Popover from 'material-ui/Popover'
 import Menu from 'material-ui/Menu'
 import MenuItem from 'material-ui/MenuItem'
+import HomeIcon from 'material-ui/svg-icons/action/home'
+import PollIcon from 'material-ui/svg-icons/social/poll'
+import FingerprintIcon from 'material-ui/svg-icons/action/fingerprint'
+import AccountCircleIcon from 'material-ui/svg-icons/action/account-circle'
+
+import RemoveRedEye from 'material-ui/svg-icons/image/remove-red-eye'
+import PersonAdd from 'material-ui/svg-icons/social/person-add'
+import ContentLink from 'material-ui/svg-icons/content/link'
+import Divider from 'material-ui/Divider'
+import ContentCopy from 'material-ui/svg-icons/content/content-copy'
+import Download from 'material-ui/svg-icons/file/file-download'
+import Delete from 'material-ui/svg-icons/action/delete'
 import * as Actions from '../../actions/app'
 
 const propTypes = {
@@ -48,6 +60,7 @@ export class MenuContainer extends Component {
         <MenuItem
           key={ 1 }
           primaryText='Sign Out'
+          leftIcon={ <Download /> }
           onTouchTap={ () => this.handleSignout() }
         />,
       ]
@@ -56,14 +69,17 @@ export class MenuContainer extends Component {
       <MenuItem
         key={ 1 }
         primaryText='Login'
+        leftIcon={ <FingerprintIcon /> }
         onTouchTap={ () => {
           browserHistory.push('/login')
           this.handleRequestClose()
         } }
       />,
+      <Divider />,
       <MenuItem
         key={ 2 }
-        primaryText='Register'
+        primaryText='Sign Up'
+        leftIcon={ <AccountCircleIcon /> }
         onTouchTap={ () => {
           browserHistory.push('/register')
           this.handleRequestClose()
@@ -81,7 +97,7 @@ export class MenuContainer extends Component {
 
   render() {
     return (
-      <div>
+      <div className='material-menu'>
         <AppBar
           title='POLL-GURU'
           iconElementRight={ <FlatButton label={ this.renderLoginLink() } /> }
@@ -95,21 +111,37 @@ export class MenuContainer extends Component {
           targetOrigin={ { horizontal: 'left', vertical: 'top' } }
           onRequestClose={ this.handleRequestClose }
         >
-          <Menu>
+          <Menu
+            style={ { fontWeight: 200 } }
+            autoWidth={ true }
+          >
             <MenuItem
-              primaryText='Homepage'
+              primaryText='Home'
+              leftIcon={ <HomeIcon /> }
               onTouchTap={ () => {
                 browserHistory.push('/')
                 this.handleRequestClose()
               } }
             />
+            <Divider />
+            <MenuItem
+              primaryText='Create a Poll'
+              leftIcon={ <PollIcon /> }
+              onTouchTap={ () => {
+                browserHistory.push('/')
+                this.handleRequestClose()
+              } }
+            />
+            <Divider />
             <MenuItem
               primaryText='Subpage'
+              leftIcon={ <ContentLink /> }
               onTouchTap={ () => {
                 browserHistory.push('/subpage')
                 this.handleRequestClose()
               } }
             />
+            <Divider />
             {this.renderAuthLinks()}
           </Menu>
         </Popover>
