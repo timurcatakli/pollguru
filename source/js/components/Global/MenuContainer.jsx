@@ -76,7 +76,7 @@ export class MenuContainer extends Component {
     if (this.props.authenticated) {
       return 'Sign Out'
     }
-    return 'Login'
+    return 'Register'
   }
 
   render() {

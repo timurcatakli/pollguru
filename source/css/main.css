@@ -452,7 +452,7 @@ nav {
   background-color: #fff;
 }
 .page {
-  padding-top: 20px;
+  padding-top: 0px;
 }
 .page.fullscreen {
   /*padding-top: 0;*/

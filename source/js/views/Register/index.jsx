@@ -1,11 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import { Field, reduxForm } from 'redux-form'
-import { TextField } from 'redux-form-material-ui'
 import { connect } from 'react-redux'
-import { Card, CardActions, CardTitle, CardText } from 'material-ui/Card'
+import { TextField } from 'redux-form-material-ui'
+import { Link } from 'react-router'
 import RaisedButton from 'material-ui/RaisedButton'
 import * as Actions from '../../actions/app'
-
 
 const propTypes = {
   handleSubmit: PropTypes.func.isRequired,
@@ -43,48 +42,64 @@ export class Register extends Component {
 
   render() {
     return (
-      <div>
-        <div className='features anchor'>
-          <div className='container'>
-            <div className='row'>
-              <div className='col-md-6 col-md-offset-3 aligncenter'>
-                <Card>
-                  <CardTitle title='REGISTER' />
-                  <CardText>
-                    <form onSubmit={ this.props.handleSubmit(this.handleFormSubmit) }>
-                      <Field
-                        name='email'
-                        id='login-form-email'
-                        hintText='Email'
-                        floatingLabelText='Enter your email'
-                        component={ TextField }
-                        // errorText={ this.props.errors.password }
-                      />
-                      <Field
-                        name='password'
-                        id='login-form-password'
-                        hintText='Password'
-                        floatingLabelText='Enter your password'
-                        type='password'
-                        component={ TextField }
-                      />
-                      <Field
-                        name='passwordConfirmation'
-                        id='login-form-password-confirmation'
-                        hintText='Confirm Password'
-                        floatingLabelText='Confirm your password'
-                        type='password'
-                        component={ TextField }
-                      />
-                    </form>
-                  </CardText>
-                  <CardActions>
-                    <RaisedButton label='Sign in' onTouchTap={ this.props.handleSubmit(this.handleFormSubmit) } primary />
-                  </CardActions>
-                </Card>
-              </div>
-            </div>
+      <div className='page fullscreen grey lighten-4'>
+        <div className='login-form z-depth-1'>
+          <h1>Sign Up</h1>
+          <div className='input-field'>
+            <Field
+              name='email'
+              id='login-form-email'
+              hintText='Email'
+              floatingLabelText='Enter your email'
+              component={ TextField }
+              fullWidth
+            />
           </div>
+
+          <div className='input-field'>
+            <Field
+              name='password'
+              id='login-form-password'
+              hintText='Password'
+              floatingLabelText='Enter your password'
+              type='password'
+              component={ TextField }
+              fullWidth
+            />
+          </div>
+
+          <div className='input-field'>
+            <Field
+              name='passwordConfirmation'
+              id='login-form-password-confirmation'
+              hintText='Confirm Password'
+              floatingLabelText='Confirm your password'
+              type='password'
+              component={ TextField }
+              fullWidth
+            />
+          </div>
+
+          <RaisedButton
+            backgroundColor={ '#fdd835' }
+            className='
+              waves-effect
+              waves-light
+              accent-color
+              block
+              m-b-20
+              animated
+              bouncein
+              delay-2'
+            fullWidth
+            label='Sign Up'
+            onTouchTap={ this.props.handleSubmit(this.handleFormSubmit) }
+          />
+          <span>
+            Have an account?
+            &nbsp;
+            <Link className='primary-text' to='/login'>Login Here</Link>
+          </span>
         </div>
       </div>
     )
