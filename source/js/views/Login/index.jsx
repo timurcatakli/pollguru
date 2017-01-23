@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { TextField } from 'redux-form-material-ui'
-import { Card, CardActions, CardTitle, CardText } from 'material-ui/Card'
 import RaisedButton from 'material-ui/RaisedButton'
 import * as Actions from '../../actions/app'
 
@@ -34,41 +33,48 @@ export class Login extends Component {
 
   render() {
     return (
-      <div>
-        <div className='features anchor'>
-          <div className='container'>
-            <div className='row'>
-              <div className='col-md-6 col-md-offset-3 aligncenter'>
-                <Card>
-                  <CardTitle title='LOGIN' />
-                  <CardText>
-                    <form onSubmit={ this.props.handleSubmit(this.handleFormSubmit) }>
-                      <Field
-                        name='email'
-                        id='login-form-email'
-                        hintText='Email'
-                        floatingLabelText='Enter your email'
-                        component={ TextField }
-                        // errorText={ this.props.errors.password }
-                      />
-                      <br />
-                      <Field
-                        name='password'
-                        id='login-form-password'
-                        hintText='Password'
-                        floatingLabelText='Enter your password'
-                        type='password'
-                        component={ TextField }
-                      />
-                    </form>
-                  </CardText>
-                  <CardActions>
-                    <RaisedButton label='Sign in' onTouchTap={ this.props.handleSubmit(this.handleFormSubmit) } primary />
-                  </CardActions>
-                </Card>
-              </div>
-            </div>
+      <div className='page fullscreen grey lighten-4'>
+        <div className='login-form z-depth-1'>
+          <h1>Login</h1>
+          <div className='input-field'>
+            <Field
+              name='email'
+              id='login-form-email'
+              hintText='Email'
+              floatingLabelText='Enter your email'
+              component={ TextField }
+              fullWidth
+            />
           </div>
+
+          <div className='input-field'>
+            <Field
+              name='password'
+              id='login-form-password'
+              hintText='Password'
+              floatingLabelText='Enter your password'
+              type='password'
+              component={ TextField }
+              fullWidth
+            />
+          </div>
+          <RaisedButton
+            backgroundColor={ '#fdd835' }
+            className='
+              input-field
+              waves-effect
+              waves-light
+              accent-color
+              block
+              m-b-20
+              animated
+              bouncein
+              delay-2'
+            fullWidth
+            label='Sign in'
+            onTouchTap={ this.props.handleSubmit(this.handleFormSubmit) }
+          />
+          <span>Don't have an account? <a className='primary-text' href='signup.html'>Sign Up</a></span>
         </div>
       </div>
     )

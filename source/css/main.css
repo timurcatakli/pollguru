@@ -452,10 +452,10 @@ nav {
   background-color: #fff;
 }
 .page {
-  padding-top: 56px;
+  padding-top: 20px;
 }
 .page.fullscreen {
-  padding-top: 0;
+  /*padding-top: 0;*/
   height: 100vh;
 }
 .page.with-tab {
@@ -1926,7 +1926,7 @@ footer.page-footer .footer-copyright i {
     margin: 20px;
     border-radius: 2px;
     background-color: #fff;
-    position: absolute;
+    position: static;
     top: 56px;
     left: 0;
     right: 0;
@@ -1941,7 +1941,7 @@ footer.page-footer .footer-copyright i {
 }
 .login-form input,
 .signup-form input {
-  margin-bottom: 30px;
+  margin-bottom: 0px;
 }
 
 /* Lockscreen */

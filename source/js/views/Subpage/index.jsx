@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 export default class Subpage extends Component {
   render() {
     return (
-      <div>
+      <div className='page fullscreen'>
         <div className='section featured center grey lighten-5'>
           <h2 className='heading'>App Centric</h2>
           <p>Shuttle isnt just a website, it comes with tons of App Pages!</p>
