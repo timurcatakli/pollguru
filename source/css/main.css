@@ -452,7 +452,7 @@ nav {
   background-color: #fff;
 }
 .page {
-  padding-top: 20px;
+  padding-top: 0px;
 }
 .page.fullscreen {
   /*padding-top: 0;*/
@@ -1923,14 +1923,16 @@ footer.page-footer .footer-copyright i {
 .login-form,
 .signup-form {
     padding: 20px;
-    margin: 20px;
     border-radius: 2px;
     background-color: #fff;
-    position: static;
+    position: absolute;
     top: 56px;
     left: 0;
     right: 0;
     z-index: 99;
+    width: 94%;
+    margin: 30px auto;
+    max-width: 720px;
 }
 .login-form h1,
 .signup-form h1 {
@@ -2339,4 +2341,10 @@ span.data-color {
 .modal.features .col p {
   font-size: 1.2rem;
   margin: 0;
+}
+/*  Custom Material UI
+    –––––––––––––––––––––––––––––––––––––––––––––––––– */
+.material-menu {
+  font-size: 1em;
+  background-color: red;
 }

@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react'
 import { Field, reduxForm } from 'redux-form'
-import { connect } from 'react-redux'
 import { TextField } from 'redux-form-material-ui'
+import { connect } from 'react-redux'
 import { Card, CardActions, CardTitle, CardText } from 'material-ui/Card'
 import RaisedButton from 'material-ui/RaisedButton'
 import * as Actions from '../../actions/app'
+
 
 const propTypes = {
   handleSubmit: PropTypes.func.isRequired,
@@ -24,10 +25,18 @@ const validate = values => {
     errors.password = 'Please enter a password.'
   }
 
+  if (!values.passwordConfirmation) {
+    errors.passwordConfirmation = 'Please enter a password confirmation.'
+  }
+
+  if (values.password !== values.passwordConfirmation) {
+    errors.password = 'Passwords do not match'
+  }
+
   return errors
 }
 
-export class Login extends Component {
+export class Register extends Component {
   handleFormSubmit = (values) => {
     this.props.signInUser(values)
   }
@@ -40,7 +49,7 @@ export class Login extends Component {
             <div className='row'>
               <div className='col-md-6 col-md-offset-3 aligncenter'>
                 <Card>
-                  <CardTitle title='LOGIN' />
+                  <CardTitle title='REGISTER' />
                   <CardText>
                     <form onSubmit={ this.props.handleSubmit(this.handleFormSubmit) }>
                       <Field
@@ -51,12 +60,19 @@ export class Login extends Component {
                         component={ TextField }
                         // errorText={ this.props.errors.password }
                       />
-                      <br />
                       <Field
                         name='password'
                         id='login-form-password'
                         hintText='Password'
                         floatingLabelText='Enter your password'
+                        type='password'
+                        component={ TextField }
+                      />
+                      <Field
+                        name='passwordConfirmation'
+                        id='login-form-password-confirmation'
+                        hintText='Confirm Password'
+                        floatingLabelText='Confirm your password'
                         type='password'
                         component={ TextField }
                       />
@@ -75,5 +91,5 @@ export class Login extends Component {
   }
 }
 
-Login.propTypes = propTypes
-export default connect(null, Actions)(reduxForm({ form: 'login', validate })(Login))
+Register.propTypes = propTypes
+export default connect(null, Actions)(reduxForm({ form: 'register', validate })(Register))

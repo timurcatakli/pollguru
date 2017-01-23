@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { TextField } from 'redux-form-material-ui'
+import { Link } from 'react-router'
 import RaisedButton from 'material-ui/RaisedButton'
 import * as Actions from '../../actions/app'
 
@@ -61,7 +62,6 @@ export class Login extends Component {
           <RaisedButton
             backgroundColor={ '#fdd835' }
             className='
-              input-field
               waves-effect
               waves-light
               accent-color
@@ -74,7 +74,11 @@ export class Login extends Component {
             label='Sign in'
             onTouchTap={ this.props.handleSubmit(this.handleFormSubmit) }
           />
-          <span>Don't have an account? <a className='primary-text' href='signup.html'>Sign Up</a></span>
+          <span>
+            Don&#39;t have an account?
+            &nbsp;
+            <Link className='primary-text' to='/register'>Register For Free</Link>
+          </span>
         </div>
       </div>
     )
