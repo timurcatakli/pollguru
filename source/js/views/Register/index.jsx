@@ -2,9 +2,12 @@ import React, { Component, PropTypes } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { TextField } from 'redux-form-material-ui'
-import { Link } from 'react-router'
+import { browserHistory } from 'react-router'
 import RaisedButton from 'material-ui/RaisedButton'
+import { Card, CardActions, CardTitle, CardText } from 'material-ui/Card'
+import FlatButton from 'material-ui/FlatButton'
 import * as Actions from '../../actions/app'
+import PgDivider from '../../utils/PgDivider'
 
 const propTypes = {
   handleSubmit: PropTypes.func.isRequired,
@@ -50,11 +53,11 @@ export class Register extends Component {
 
   render() {
     return (
-      <div className='page fullscreen grey lighten-4'>
-        <div className='login-form z-depth-1'>
-          <h1>Sign Up</h1>
-          { this.renderAuthenticationError() }
-          <div className='input-field'>
+      <div className='container'>
+        <Card>
+          <CardTitle title='Sign Up' subtitle='Card subtitle' />
+          <CardText>
+            { this.renderAuthenticationError() }
             <Field
               name='email'
               id='login-form-email'
@@ -63,9 +66,7 @@ export class Register extends Component {
               component={ TextField }
               fullWidth
             />
-          </div>
 
-          <div className='input-field'>
             <Field
               name='password'
               id='login-form-password'
@@ -75,9 +76,7 @@ export class Register extends Component {
               component={ TextField }
               fullWidth
             />
-          </div>
 
-          <div className='input-field'>
             <Field
               name='passwordConfirmation'
               id='login-form-password-confirmation'
@@ -87,29 +86,28 @@ export class Register extends Component {
               component={ TextField }
               fullWidth
             />
-          </div>
 
-          <RaisedButton
-            backgroundColor={ '#fdd835' }
-            className='
-              waves-effect
-              waves-light
-              accent-color
-              block
-              m-b-20
-              animated
-              bouncein
-              delay-2'
-            fullWidth
-            label='Sign Up'
-            onTouchTap={ this.props.handleSubmit(this.handleFormSubmit) }
-          />
-          <span>
-            Have an account?
-            &nbsp;
-            <Link className='primary-text' to='/login'>Login Here</Link>
-          </span>
-        </div>
+            <PgDivider />
+
+            <RaisedButton
+              backgroundColor={ '#fdd835' }
+              fullWidth
+              label='Sign Up'
+              onTouchTap={ this.props.handleSubmit(this.handleFormSubmit) }
+            />
+
+            <PgDivider />
+          </CardText>
+          <CardActions>
+            <span>Have an account?</span>
+            <FlatButton
+              onTouchTap={ () => { browserHistory.push('/login') } }
+              backgroundColor={ '#fdd835' }
+              label='Login Here'
+            />
+          </CardActions>
+        </Card>
+        <PgDivider />
       </div>
     )
   }
