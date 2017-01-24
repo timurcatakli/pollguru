@@ -8,7 +8,8 @@ import * as Actions from '../../actions/app'
 
 const propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  signInUser: PropTypes.func.isRequired,
+  signUpUser: PropTypes.func.isRequired,
+  authenticationError: PropTypes.string,
 }
 
 const validate = values => {
@@ -37,7 +38,14 @@ const validate = values => {
 
 export class Register extends Component {
   handleFormSubmit = (values) => {
-    this.props.signInUser(values)
+    this.props.signUpUser(values)
+  }
+
+  renderAuthenticationError() {
+    if (this.props.authenticationError) {
+      return <div className='alert alert-danger'>{ this.props.authenticationError }</div>
+    }
+    return <div />
   }
 
   render() {
@@ -45,6 +53,7 @@ export class Register extends Component {
       <div className='page fullscreen grey lighten-4'>
         <div className='login-form z-depth-1'>
           <h1>Sign Up</h1>
+          { this.renderAuthenticationError() }
           <div className='input-field'>
             <Field
               name='email'
@@ -106,5 +115,10 @@ export class Register extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    authenticationError: state.auth.error,
+  }
+}
 Register.propTypes = propTypes
-export default connect(null, Actions)(reduxForm({ form: 'register', validate })(Register))
+export default connect(mapStateToProps, Actions)(reduxForm({ form: 'register', validate })(Register))
