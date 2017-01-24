@@ -4,20 +4,17 @@ import AppBar from 'material-ui/AppBar'
 import FlatButton from 'material-ui/FlatButton'
 import { browserHistory } from 'react-router'
 import Popover from 'material-ui/Popover'
+import IconButton from 'material-ui/IconButton'
 import Menu from 'material-ui/Menu'
 import MenuItem from 'material-ui/MenuItem'
 import HomeIcon from 'material-ui/svg-icons/action/home'
 import PollIcon from 'material-ui/svg-icons/social/poll'
+import PersonIcon from 'material-ui/svg-icons/social/person'
 import FingerprintIcon from 'material-ui/svg-icons/action/fingerprint'
 import AccountCircleIcon from 'material-ui/svg-icons/action/account-circle'
-
-import RemoveRedEye from 'material-ui/svg-icons/image/remove-red-eye'
-import PersonAdd from 'material-ui/svg-icons/social/person-add'
 import ContentLink from 'material-ui/svg-icons/content/link'
 import Divider from 'material-ui/Divider'
-import ContentCopy from 'material-ui/svg-icons/content/content-copy'
 import Download from 'material-ui/svg-icons/file/file-download'
-import Delete from 'material-ui/svg-icons/action/delete'
 import * as Actions from '../../actions/app'
 
 const propTypes = {
@@ -29,13 +26,12 @@ const propTypes = {
 export class MenuContainer extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      popoverOpen: false,
-    }
+    this.state = { popoverOpen: false }
   }
 
   handleSignout() {
     this.props.signOutUser()
+    this.state = { popoverOpen: false }
   }
 
   handleLeftIconButtonTouchTap = (event) => {
@@ -58,7 +54,17 @@ export class MenuContainer extends Component {
     if (this.props.authenticated) {
       return [
         <MenuItem
-          key={ 1 }
+          key={ 0 }
+          primaryText='Account'
+          leftIcon={ <PersonIcon /> }
+          onTouchTap={ () => {
+            browserHistory.push('/account')
+            this.handleRequestClose()
+          } }
+        />,
+        <Divider key={ 1 } />,
+        <MenuItem
+          key={ 2 }
           primaryText='Sign Out'
           leftIcon={ <Download /> }
           onTouchTap={ () => this.handleSignout() }
@@ -75,9 +81,9 @@ export class MenuContainer extends Component {
           this.handleRequestClose()
         } }
       />,
-      <Divider />,
+      <Divider key={ 2 } />,
       <MenuItem
-        key={ 2 }
+        key={ 3 }
         primaryText='Sign Up'
         leftIcon={ <AccountCircleIcon /> }
         onTouchTap={ () => {
@@ -90,9 +96,20 @@ export class MenuContainer extends Component {
 
   renderLoginLink() {
     if (this.props.authenticated) {
-      return 'Sign Out'
+      return (
+        <IconButton tooltip='Account Details'>
+          <PersonIcon />
+        </IconButton>
+      )
     }
-    return 'Register'
+    return (
+      <FlatButton
+        label={ 'Login' }
+        onTouchTap={ () => {
+          browserHistory.push('/login')
+        } }
+      />
+    )
   }
 
   render() {
@@ -100,10 +117,9 @@ export class MenuContainer extends Component {
       <div className='material-menu'>
         <AppBar
           title='POLL-GURU'
-          iconElementRight={ <FlatButton label={ this.renderLoginLink() } /> }
+          iconElementRight={ this.renderLoginLink() }
           onLeftIconButtonTouchTap={ this.handleLeftIconButtonTouchTap }
         />
-
         <Popover
           open={ this.state.popoverOpen }
           anchorEl={ this.state.popoverAnchorEl }
@@ -129,6 +145,15 @@ export class MenuContainer extends Component {
               leftIcon={ <PollIcon /> }
               onTouchTap={ () => {
                 browserHistory.push('/')
+                this.handleRequestClose()
+              } }
+            />
+            <Divider />
+            <MenuItem
+              primaryText='Polls'
+              leftIcon={ <PollIcon /> }
+              onTouchTap={ () => {
+                browserHistory.push('/polls')
                 this.handleRequestClose()
               } }
             />

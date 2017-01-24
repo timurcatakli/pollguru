@@ -9,6 +9,7 @@ import * as Actions from '../../actions/app'
 const propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   signInUser: PropTypes.func.isRequired,
+  authenticationError: PropTypes.string,
 }
 
 const validate = values => {
@@ -32,11 +33,19 @@ export class Login extends Component {
     this.props.signInUser(values)
   }
 
+  renderAuthenticationError() {
+    if (this.props.authenticationError) {
+      return <div className='alert alert-danger'>{ this.props.authenticationError }</div>
+    }
+    return <div />
+  }
+
   render() {
     return (
       <div className='page fullscreen grey lighten-4'>
         <div className='login-form z-depth-1'>
           <h1>Login</h1>
+          { this.renderAuthenticationError() }
           <div className='input-field'>
             <Field
               name='email'
@@ -85,5 +94,11 @@ export class Login extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    authenticationError: state.auth.error,
+  }
+}
+
 Login.propTypes = propTypes
-export default connect(null, Actions)(reduxForm({ form: 'login', validate })(Login))
+export default connect(mapStateToProps, Actions)(reduxForm({ form: 'login', validate })(Login))

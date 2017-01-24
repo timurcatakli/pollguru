@@ -1,3 +1,4 @@
+// https://github.com/Stanko/react-redux-webpack2-boilerplate
 # React and Redux, Webpack 2 boilerplate
 
 ## Table of contents

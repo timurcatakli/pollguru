@@ -8,6 +8,8 @@ import About from 'views/About'
 import Subpage from 'views/Subpage'
 import Login from 'views/Login'
 import Register from 'views/Register'
+import Polls from 'views/PollsContainer'
+import AccountContainer from 'views/AccountContainer'
 import NotFound from 'views/NotFound'
 import RequireAuth from './utils/RequireAuth'
 
@@ -19,6 +21,8 @@ export const routeCodes = {
   SUBPAGE: `${ publicPath }subpage`,
   LOGIN: `${ publicPath }login`,
   REGISTER: `${ publicPath }register`,
+  POLLS: `${ publicPath }polls`,
+  ACCOUNT: `${ publicPath }account`,
 }
 
 export default class Routes extends Component {
@@ -32,6 +36,8 @@ export default class Routes extends Component {
           <Route path={ routeCodes.SUBPAGE } component={ Subpage } />
           <Route path={ routeCodes.LOGIN } component={ Login } />
           <Route path={ routeCodes.REGISTER } component={ Register } />
+          <Route path={ routeCodes.POLLS } component={ Polls } />
+          <Route path={ routeCodes.ACCOUNT } component={ AccountContainer } />
           <Route path='*' component={ NotFound } />
         </Route>
       </Router>
