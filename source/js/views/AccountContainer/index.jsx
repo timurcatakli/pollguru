@@ -1,112 +1,171 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
 import { Card, CardActions, CardTitle, CardText } from 'material-ui/Card'
+import {
+  Table,
+  TableBody,
+  TableFooter,
+  TableHeader,
+  TableHeaderColumn,
+  TableRow,
+  TableRowColumn,
+} from 'material-ui/Table'
 import FlatButton from 'material-ui/FlatButton'
-import TextField from 'material-ui/TextField'
-import ContentAdd from 'material-ui/svg-icons/content/add'
-import RaisedButton from 'material-ui/RaisedButton'
+import * as Actions from '../../actions/app'
 import PgDivider from '../../utils/PgDivider'
 
-export default class AccountContainer extends Component {
+const propTypes = {
+  fetchPolls: PropTypes.func,
+}
+
+const styles = {
+  propContainer: {
+    width: 200,
+    overflow: 'hidden',
+    margin: '20px auto 0',
+  },
+  propToggleHeader: {
+    margin: '20px auto 10px',
+  },
+}
+
+const tableData = [
+  {
+    name: 'John SmithJohn SmithJohn SmithJohn SmithJohn Smith',
+    status: 'Employed',
+  },
+  {
+    name: 'Randal White',
+    status: 'Unemployed',
+  },
+  {
+    name: 'Stephanie Sanders',
+    status: 'Employed',
+  },
+  {
+    name: 'Steve Brown',
+    status: 'Employed',
+  },
+  {
+    name: 'Joyce Whitten',
+    status: 'Employed',
+  },
+  {
+    name: 'Samuel Roberts',
+    status: 'Employed',
+  },
+  {
+    name: 'Adam Moore',
+    status: 'Employed',
+  },
+]
+
+export class AccountContainer extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      fixedHeader: true,
+      fixedFooter: true,
+      stripedRows: false,
+      showRowHover: false,
+      selectable: true,
+      multiSelectable: true,
+      enableSelectAll: true,
+      deselectOnClickaway: true,
+      showCheckboxes: true,
+      height: '300px',
+    }
+  }
+
+  componentWillMount() {
+    this.props.fetchPolls()
+  }
+
   render() {
+    const { polls } = this.props
     return (
       <div className='container'>
-        <h1 className='underline'>H1 Sample Title Goes Here</h1>
-        <h2 className='underline'>H1 Sample Title Goes Here</h2>
-        <h3 className='underline'>H1 Sample Title Goes Here</h3>
-        <h4 className='underline'>H1 Sample Title Goes Here</h4>
-        <h5 className='underline'>H1 Sample Title Goes Here</h5>
-        <PgDivider />
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-        minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-        ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-        sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
-
-        <PgDivider />
-
         <Card>
-          <CardTitle title='Card title' subtitle='Card subtitle' />
+          <CardTitle title='Account Info' subtitle='Card subtitle' />
           <CardText>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-            Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-            Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
-
+            <ul>
+              <li>Account Email Address</li>
+              <li>Email Verification</li>
+              <li>List of polls</li>
+              <li>Create a poll action</li>
+              <li>Contact Support</li>
+            </ul>
             <PgDivider />
 
-            <TextField
-              hintText='Hint Text'
-              floatingLabelText='Floating Label Text'
-              fullWidth
-            />
+            <Table
+              fixedHeader={ this.state.fixedHeader }
+              selectable={ this.state.selectable }
+              multiSelectable={ this.state.multiSelectable }
+            >
+              <TableHeader
+                displaySelectAll={ this.state.showCheckboxes }
+                adjustForCheckbox={ this.state.showCheckboxes }
+                enableSelectAll={ this.state.enableSelectAll }
+              >
+                <TableRow>
+                  <TableHeaderColumn
+                    colSpan='2'
+                    tooltip='Your Polls'
+                    style={ { textAlign: 'center' } }
+                  >
+                    Your Polls
+                  </TableHeaderColumn>
+                </TableRow>
+                <TableRow>
+                  <TableHeaderColumn tooltip='The Name'>Name</TableHeaderColumn>
+                  <TableHeaderColumn tooltip='The Status'>Status</TableHeaderColumn>
+                  <TableHeaderColumn tooltip='The Status'>Status</TableHeaderColumn>
+                  <TableHeaderColumn tooltip='The Status'>Status</TableHeaderColumn>
+                  <TableHeaderColumn tooltip='The Status'>Status</TableHeaderColumn>
+                </TableRow>
+              </TableHeader>
+              <TableBody
+                displayRowCheckbox={ this.state.showCheckboxes }
+                deselectOnClickaway={ this.state.deselectOnClickaway }
+                showRowHover={ this.state.showRowHover }
+                stripedRows={ this.state.stripedRows }
+              >
+                {Object.keys(polls).map((row, index) => {
+                  let responseCount = 0
+                  polls[row].responses.map((response) => {
+                    console.log(response)
+                    responseCount += response.response_count
+                  })
+                  return (
+                    <TableRow key={ index }>
+                      <TableRowColumn>{ polls[row].question }</TableRowColumn>
+                      <TableRowColumn>{ responseCount }</TableRowColumn>
+                      <TableRowColumn>{ polls[row].active ? 'True' : 'False' }</TableRowColumn>
+                      <TableRowColumn>{ polls[row].created_date }</TableRowColumn>
+                      <TableRowColumn>{ polls[row].require_authentication ? 'True' : 'False' }</TableRowColumn>
+                    </TableRow>
+                  )
+                })}
+              </TableBody>
+            </Table>
 
-            <PgDivider />
-
-            <div className='grid pg-flex-baseline'>
-              <div className='col-9-12'>
-                <TextField
-                  hintText='Hint Text'
-                  floatingLabelText='Floating Label Text'
-                  fullWidth
-                />
-              </div>
-              <div className='col-3-12'>
-                <RaisedButton label='Primary' primary={ true } />
-              </div>
-            </div>
-
-            <PgDivider />
-
-            <div className='grid pg-flex-end'>
-              <div className='col-1-12'>
-                <ContentAdd />
-              </div>
-              <div className='col-11-12'>
-                <TextField
-                  hintText='Hint Text'
-                  floatingLabelText='Floating Label Text'
-                  fullWidth
-                />
-              </div>
-            </div>
-
-            <PgDivider />
           </CardText>
           <CardActions>
             <FlatButton label='Action1' />
             <FlatButton label='Action2' />
           </CardActions>
         </Card>
-
-        <PgDivider />
-
-        <div className='grid'>
-          <div className='col-1-3'>
-            <div className='content'>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-            </div>
-          </div>
-          <div className='col-1-3'>
-            <div className='content'>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-            </div>
-          </div>
-          <div className='col-1-3'>
-            <div className='content'>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-            </div>
-          </div>
-        </div>
-
-        <PgDivider />
-        <PgDivider />
         <PgDivider />
       </div>
     )
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    polls: state.polls,
+  }
+}
+
+AccountContainer.propTypes = propTypes
+export default connect(mapStateToProps, Actions)(AccountContainer)

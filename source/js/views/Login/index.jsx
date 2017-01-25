@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { TextField } from 'redux-form-material-ui'
-import { Link, browserHistory } from 'react-router'
+import { browserHistory } from 'react-router'
 import RaisedButton from 'material-ui/RaisedButton'
 import { Card, CardActions, CardTitle, CardText } from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
@@ -11,7 +11,7 @@ import PgDivider from '../../utils/PgDivider'
 
 const propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  signInUser: PropTypes.func.isRequired,
+  signInUserAction: PropTypes.func.isRequired,
   authenticationError: PropTypes.string,
 }
 
@@ -33,7 +33,7 @@ const validate = values => {
 
 export class Login extends Component {
   handleFormSubmit = (values) => {
-    this.props.signInUser(values)
+    this.props.signInUserAction(values)
   }
 
   renderAuthenticationError() {
@@ -100,4 +100,14 @@ function mapStateToProps(state) {
 }
 
 Login.propTypes = propTypes
-export default connect(mapStateToProps, Actions)(reduxForm({ form: 'login', validate })(Login))
+export default connect(mapStateToProps, Actions)(reduxForm(
+  {
+    form: 'login',
+    enableReinitialize: true,
+    initialValues: {
+      email: 'timurcatakli@gmail.com',
+      password: '123456',
+    },
+    validate,
+  }
+)(Login))
