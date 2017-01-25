@@ -116,7 +116,7 @@ export class MenuContainer extends Component {
     return (
       <div className='material-menu'>
         <AppBar
-          title='POLL-GURU'
+          title='pollguru'
           iconElementRight={ this.renderLoginLink() }
           onLeftIconButtonTouchTap={ this.handleLeftIconButtonTouchTap }
         />

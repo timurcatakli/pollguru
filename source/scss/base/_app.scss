@@ -1,0 +1,122 @@
+$secondary-color: #fdd835;
+$red-color: #f44336;
+
+/* NOTE
+html is set to 62.5% so that all the REM measurements
+are based on 10px sizing. So basically 1.5rem = 15px */
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+}
+html, body {
+  max-width: 768px;
+  margin: 0 auto;
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+img {
+  max-width: none;
+  display: block;
+  width: 100%;
+  vertical-align: middle;
+}
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+textarea {
+    resize: vertical;
+}
+
+body {
+  font-size: 1.5em;
+  line-height: 1.8;
+  font-weight: 300;
+  font-family: 'Roboto', sans-serif;
+  color: #666;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  margin-bottom: 2rem;
+  font-weight: 400;
+  color: #1c212a;
+}
+h1 { font-size: 2.4rem; line-height: 3rem; }
+h2 { font-size: 2.2rem; line-height: 3rem; }
+h3 { font-size: 2rem; line-height: 2.2rem; }
+h4 { font-size: 1.8rem; line-height: 2.2rem; }
+h5 { font-size: 1.6rem; line-height: 2rem; }
+h6 { font-size: 1.4rem; line-height: 2rem; }
+
+p { margin-top: 0; }
+
+a { color: inherit; }
+a:hover { opacity: 0.95; }
+
+.link, a,
+.link, a:link,
+.link, a:hover,
+.link, a:active,
+.link, a:focus {
+    outline: 0;
+    text-decoration: none;
+    color: $secondary-color;
+}
+body,
+input,
+textarea,
+button,
+select,
+label,
+a {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+blockquote {
+  background: #f9f9f9;
+  padding: 20px;
+}
+
+.main {
+  background: #f9f9f9;
+  padding-top: 0;
+  height: 100vh;
+}
+
+.container {
+  margin: 2rem;
+}
+
+h1, h2, h3, h4, h5, h6 .underline {
+  border-bottom: 1px solid;
+}
+
+.pg-divider {
+  margin-top: 0.6rem;
+  margin-bottom: 0.6rem;
+}
+
+.pg-flex-baseline {
+  display: flex;
+  justify-content: space-around;
+  align-items: baseline;
+}
+
+.pg-flex-end {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+}
+
+.pg-alert {
+  background-color: $red-color;
+  padding: 1rem;
+  color: white;
+  border-radius: 0.4rem;
+}

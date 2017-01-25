@@ -1,69 +1,171 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
+import { Card, CardActions, CardTitle, CardText } from 'material-ui/Card'
+import {
+  Table,
+  TableBody,
+  TableFooter,
+  TableHeader,
+  TableHeaderColumn,
+  TableRow,
+  TableRowColumn,
+} from 'material-ui/Table'
+import FlatButton from 'material-ui/FlatButton'
+import * as Actions from '../../actions/app'
+import PgDivider from '../../utils/PgDivider'
 
-export default class AccountContainer extends Component {
+const propTypes = {
+  fetchPolls: PropTypes.func,
+}
+
+const styles = {
+  propContainer: {
+    width: 200,
+    overflow: 'hidden',
+    margin: '20px auto 0',
+  },
+  propToggleHeader: {
+    margin: '20px auto 10px',
+  },
+}
+
+const tableData = [
+  {
+    name: 'John SmithJohn SmithJohn SmithJohn SmithJohn Smith',
+    status: 'Employed',
+  },
+  {
+    name: 'Randal White',
+    status: 'Unemployed',
+  },
+  {
+    name: 'Stephanie Sanders',
+    status: 'Employed',
+  },
+  {
+    name: 'Steve Brown',
+    status: 'Employed',
+  },
+  {
+    name: 'Joyce Whitten',
+    status: 'Employed',
+  },
+  {
+    name: 'Samuel Roberts',
+    status: 'Employed',
+  },
+  {
+    name: 'Adam Moore',
+    status: 'Employed',
+  },
+]
+
+export class AccountContainer extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      fixedHeader: true,
+      fixedFooter: true,
+      stripedRows: false,
+      showRowHover: false,
+      selectable: true,
+      multiSelectable: true,
+      enableSelectAll: true,
+      deselectOnClickaway: true,
+      showCheckboxes: true,
+      height: '300px',
+    }
+  }
+
+  componentWillMount() {
+    this.props.fetchPolls()
+  }
+
   render() {
+    const { polls } = this.props
     return (
-      <div className='page fullscreen'>
-        <div className='featured center grey lighten-5'>
-      <div className="animated fadeinup">
-        <div className="hero-header hero-big bg-3 animated fadeindown">
-          <div className="hero-author">
-            <div className="center">
-              <h1 className="white-text m-0">Luke Noel</h1>
-              <span className="white-text small"><em>Freelancer @Envato</em></span>
-            </div>
-          </div>
-          <div className="opacity-overlay-gradient"></div>
-        </div>
-    </div>
-<h2>asdasdasd</h2>
-    <div className="card fullscreen">
-                <div className="card-feedback">
-                  <div className="card-users">
-                    <i className="ion-ios-heart accent-text"></i> <span>346</span>
-                    <i className="ion-chatbubble-working"></i> <span>205</span>
-                  </div>
-                  <div className="card-share">
-                    <i className="ion-android-share-alt"></i> <span>Share</span>
-                  </div>
-                </div>
-                <div className="card-content">
-                  <h5><strong>Like these sweet mornings of spring which I enjoy with my whole heart</strong></h5>
-                </div>
-                <div className="card-author">
-                  <div className="media-top-object middle">
-                    <img src="img/user4.jpg" alt="" className="media-left avatar small" />
-                    <div className="media-body">
-                      <span className="small">Luke Noel at <a href="#!" className="accent-text">Apple</a></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-    <div className="card fullscreen">
-                <div className="card-feedback">
-                  <div className="card-users">
-                    <i className="ion-ios-heart accent-text"></i> <span>346</span>
-                    <i className="ion-chatbubble-working"></i> <span>205</span>
-                  </div>
-                  <div className="card-share">
-                    <i className="ion-android-share-alt"></i> <span>Share</span>
-                  </div>
-                </div>
-                <div className="card-content">
-                  <h5><strong>Like these sweet mornings of spring which I enjoy with my whole heart</strong></h5>
-                </div>
-                <div className="card-author">
-                  <div className="media-top-object middle">
-                    <img src="img/user4.jpg" alt="" className="media-left avatar small" />
-                    <div className="media-body">
-                      <span className="small">Luke Noel at <a href="#!" className="accent-text">Apple</a></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+      <div className='container'>
+        <Card>
+          <CardTitle title='Account Info' subtitle='Card subtitle' />
+          <CardText>
+            <ul>
+              <li>Account Email Address</li>
+              <li>Email Verification</li>
+              <li>List of polls</li>
+              <li>Create a poll action</li>
+              <li>Contact Support</li>
+            </ul>
+            <PgDivider />
 
-</div>
-  </div>
+            <Table
+              fixedHeader={ this.state.fixedHeader }
+              selectable={ this.state.selectable }
+              multiSelectable={ this.state.multiSelectable }
+            >
+              <TableHeader
+                displaySelectAll={ this.state.showCheckboxes }
+                adjustForCheckbox={ this.state.showCheckboxes }
+                enableSelectAll={ this.state.enableSelectAll }
+              >
+                <TableRow>
+                  <TableHeaderColumn
+                    colSpan='2'
+                    tooltip='Your Polls'
+                    style={ { textAlign: 'center' } }
+                  >
+                    Your Polls
+                  </TableHeaderColumn>
+                </TableRow>
+                <TableRow>
+                  <TableHeaderColumn tooltip='The Name'>Name</TableHeaderColumn>
+                  <TableHeaderColumn tooltip='The Status'>Status</TableHeaderColumn>
+                  <TableHeaderColumn tooltip='The Status'>Status</TableHeaderColumn>
+                  <TableHeaderColumn tooltip='The Status'>Status</TableHeaderColumn>
+                  <TableHeaderColumn tooltip='The Status'>Status</TableHeaderColumn>
+                </TableRow>
+              </TableHeader>
+              <TableBody
+                displayRowCheckbox={ this.state.showCheckboxes }
+                deselectOnClickaway={ this.state.deselectOnClickaway }
+                showRowHover={ this.state.showRowHover }
+                stripedRows={ this.state.stripedRows }
+              >
+                {Object.keys(polls).map((row, index) => {
+                  let responseCount = 0
+                  polls[row].responses.map((response) => {
+                    console.log(response)
+                    responseCount += response.response_count
+                  })
+                  return (
+                    <TableRow key={ index }>
+                      <TableRowColumn>{ polls[row].question }</TableRowColumn>
+                      <TableRowColumn>{ responseCount }</TableRowColumn>
+                      <TableRowColumn>{ polls[row].active ? 'True' : 'False' }</TableRowColumn>
+                      <TableRowColumn>{ polls[row].created_date }</TableRowColumn>
+                      <TableRowColumn>{ polls[row].require_authentication ? 'True' : 'False' }</TableRowColumn>
+                    </TableRow>
+                  )
+                })}
+              </TableBody>
+            </Table>
+
+          </CardText>
+          <CardActions>
+            <FlatButton label='Action1' />
+            <FlatButton label='Action2' />
+          </CardActions>
+        </Card>
+        <PgDivider />
+      </div>
     )
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    polls: state.polls,
+  }
+}
+
+AccountContainer.propTypes = propTypes
+export default connect(mapStateToProps, Actions)(AccountContainer)

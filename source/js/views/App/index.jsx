@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 import MenuContainer from 'components/Global/MenuContainer'
 
 export default class App extends Component {
@@ -10,11 +10,9 @@ export default class App extends Component {
   render() {
     const { children } = this.props
     return (
-      <div className='App'>
+      <div>
         <MenuContainer />
-        <div className='Page'>
-          { children }
-        </div>
+        { children }
       </div>
     )
   }
