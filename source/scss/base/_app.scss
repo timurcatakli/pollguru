@@ -45,7 +45,13 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
   margin-bottom: 2rem;
   font-weight: 400;
-  color: #1c212a;
+  color: rgba(0, 0, 0, 0.870);
+  box-sizing: border-box;
+  display: block;
+  font-weight: 300;
+  line-height: 36px;
+  text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
 }
 h1 { font-size: 2.4rem; line-height: 3rem; }
 h2 { font-size: 2.2rem; line-height: 3rem; }

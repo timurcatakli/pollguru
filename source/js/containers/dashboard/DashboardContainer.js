@@ -8,7 +8,7 @@ import { testAction, testAsync } from 'actions/app';
   asyncLoading: state.app.get('asyncLoading'),
   counter: state.app.get('counter'),
 }))
-export default class Dashboard extends Component {
+export default class DashboardContainer extends Component {
   static propTypes = {
     asyncData: PropTypes.string,
     asyncError: PropTypes.object,

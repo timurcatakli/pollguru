@@ -31,7 +31,7 @@ const validate = values => {
   return errors
 }
 
-export class Login extends Component {
+export class LoginContainer extends Component {
   handleFormSubmit = (values) => {
     this.props.signInUserAction(values)
   }
@@ -99,7 +99,7 @@ function mapStateToProps(state) {
   }
 }
 
-Login.propTypes = propTypes
+LoginContainer.propTypes = propTypes
 export default connect(mapStateToProps, Actions)(reduxForm(
   {
     form: 'login',
@@ -110,4 +110,4 @@ export default connect(mapStateToProps, Actions)(reduxForm(
     },
     validate,
   }
-)(Login))
+)(LoginContainer))
