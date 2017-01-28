@@ -1,11 +1,13 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import { browserHistory } from 'react-router'
 import { Card, CardTitle, CardText } from 'material-ui/Card'
 import { List, ListItem } from 'material-ui/List'
 import Divider from 'material-ui/Divider'
 import Avatar from 'material-ui/Avatar'
 import { yellow600 } from 'material-ui/styles/colors'
 import EditorInsertChart from 'material-ui/svg-icons/editor/insert-chart'
+import KeyboardArrowRight from 'material-ui/svg-icons/hardware/keyboard-arrow-right'
 import * as Actions from '../../actions/app'
 import PgDivider from '../../utils/PgDivider'
 
@@ -58,7 +60,6 @@ class AccountContainer extends Component {
                 const responseCount = polls[row].responses.map((item) => {
                   return item.response_count
                 })
-
                 const totalResponseCount = responseCount.reduce((prev, curr) => {
                   return prev + curr
                 })
@@ -70,9 +71,10 @@ class AccountContainer extends Component {
                       leftAvatar={
                         <Avatar icon={ <EditorInsertChart /> } backgroundColor={ yellow600 } />
                       }
+                      rightIcon={ <KeyboardArrowRight /> }
                       primaryText={ polls[row].question }
                       secondaryText={ `# of Responses: ${ totalResponseCount }` }
-                      onTouchTap={ () => { console.log('List Item') } }
+                      onTouchTap={ () => { browserHistory.push(`/poll/${ row }`) } }
                     />
                     <Divider />
                   </div>

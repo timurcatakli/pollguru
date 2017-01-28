@@ -1,5 +1,6 @@
 $secondary-color: #fdd835;
 $red-color: #f44336;
+$gray-color: #e8e8e8;
 
 /* NOTE
 html is set to 62.5% so that all the REM measurements
@@ -89,6 +90,15 @@ blockquote {
   padding: 20px;
 }
 
+// .main {
+//   background: #8a43a3;
+//   background: -webkit-linear-gradient(#8a43a3, #5c6bac);
+//   background: -o-linear-gradient(#8a43a3, #5c6bac);
+//   background: -moz-linear-gradient(#8a43a3, #5c6bac);
+//   background: linear-gradient(#8a43a3, #5c6bac);
+//   padding-top: 0;
+//   height: 100vh;
+// }
 .main {
   background: #f9f9f9;
   padding-top: 0;
@@ -97,10 +107,6 @@ blockquote {
 
 .container {
   margin: 2rem;
-}
-
-h1, h2, h3, h4, h5, h6 .underline {
-  border-bottom: 1px solid;
 }
 
 .pg-divider {
@@ -125,4 +131,50 @@ h1, h2, h3, h4, h5, h6 .underline {
   padding: 1rem;
   color: white;
   border-radius: 0.4rem;
+}
+
+.poll-question {
+  font-family: 'Crete Round', serif;
+  font-weight: 300;
+  font-size: 6rem;
+  line-height: 8rem;
+  text-align: center;
+  display: inline-block;
+  font-stretch: normal;
+  font-style: normal;
+}
+
+.poll-response {
+  font-weight: 300;
+  font-size: 3rem;
+}
+
+.poll-badge {
+  float: right;
+  text-align: right;
+}
+
+.poll-container {
+  background-color: $gray-color;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  height: 7rem;
+  padding-left: 2rem;
+}
+
+.poll-vote-count {
+  background-color: #a4c639;
+  text-align: center;
+  padding: 0.8rem;
+  border-radius: 0.4rem;
+  color: white;
+  float: right;
+  margin-right: 1rem;
+  width: 12rem;
+}
+
+.poll-vote-count-label {
+  font-size: 3rem;
+  font-weight: 400;
 }

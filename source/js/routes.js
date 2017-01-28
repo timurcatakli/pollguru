@@ -7,7 +7,8 @@ import DashboardContainer from 'containers/dashboard/DashboardContainer'
 import Subpage from 'containers/subpage'
 import LoginContainer from 'containers/login/LoginContainer'
 import Register from 'containers/register'
-import Polls from 'containers/polls/PollsContainer'
+import PollContainer from 'containers/poll/PollContainer'
+import PollSearchContainer from 'containers/poll/PollSearchContainer'
 import AccountContainer from 'containers/account/AccountContainer'
 import NotFound from 'containers/not-found'
 import RequireAuth from './utils/RequireAuth'
@@ -22,7 +23,9 @@ export default class Routes extends Component {
           <Route path='login' component={ LoginContainer } />
           <Route path='register' component={ Register } />
           <Route name='Poll' path='poll' module='poll'>
-              <Route path=':pollId' component={ AccountContainer } />
+            <IndexRoute component={ PollSearchContainer } />
+            <Route path='create' component={ Subpage } />
+            <Route path=':pollId' component={ PollContainer } />
           </Route>
 
           <Route path='account' component={ AccountContainer } />
