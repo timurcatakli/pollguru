@@ -85,7 +85,7 @@ export function signOutUser() {
 export function authUserAction(payload) {
   return {
     type: AUTH_USER,
-    payload
+    payload,
   }
 }
 

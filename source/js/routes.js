@@ -1,43 +1,33 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
-
-
-import App from 'views/App'
-import Dashboard from 'views/Dashboard'
-import About from 'views/About'
-import Subpage from 'views/Subpage'
-import Login from 'views/Login'
-import Register from 'views/Register'
-import Polls from 'views/PollsContainer'
-import AccountContainer from 'views/AccountContainer'
-import NotFound from 'views/NotFound'
+import App from 'containers/App'
+import DashboardContainer from 'containers/dashboard/DashboardContainer'
+import Subpage from 'containers/subpage'
+import LoginContainer from 'containers/login/LoginContainer'
+import Register from 'containers/register'
+import PollContainer from 'containers/poll/PollContainer'
+import PollSearchContainer from 'containers/poll/PollSearchContainer'
+import CreatePollMainContainer from 'containers/poll/CreatePollMainContainer'
+import AccountContainer from 'containers/account/AccountContainer'
+import NotFound from 'containers/not-found'
 import RequireAuth from './utils/RequireAuth'
 
-const publicPath = '/'
-
-export const routeCodes = {
-  DASHBOARD: publicPath,
-  ABOUT: `${ publicPath }about`,
-  SUBPAGE: `${ publicPath }subpage`,
-  LOGIN: `${ publicPath }login`,
-  REGISTER: `${ publicPath }register`,
-  POLLS: `${ publicPath }polls`,
-  ACCOUNT: `${ publicPath }account`,
-}
-
-export default class Routes extends Component {
+export default class Routes extends React.Component {
   render() {
     return (
       <Router history={ browserHistory }>
-        <Route path={ publicPath } component={ App }>
-          <IndexRoute component={ Dashboard } />
-          <Route path={ routeCodes.POCKET_AUTH } component={ Dashboard } />
-          <Route path={ routeCodes.ABOUT } component={ RequireAuth(About) } />
-          <Route path={ routeCodes.SUBPAGE } component={ Subpage } />
-          <Route path={ routeCodes.LOGIN } component={ Login } />
-          <Route path={ routeCodes.REGISTER } component={ Register } />
-          <Route path={ routeCodes.POLLS } component={ Polls } />
-          <Route path={ routeCodes.ACCOUNT } component={ AccountContainer } />
+        <Route path='/' component={ App }>
+          <IndexRoute component={ DashboardContainer } />
+          <Route path='subpage' component={ Subpage } />
+          <Route path='login' component={ LoginContainer } />
+          <Route path='register' component={ Register } />
+          <Route name='Poll' path='poll' module='poll'>
+            <IndexRoute component={ PollSearchContainer } />
+            <Route path='create' component={ CreatePollMainContainer } />
+            <Route path=':pollId' component={ PollContainer } />
+          </Route>
+
+          <Route path='account' component={ AccountContainer } />
           <Route path='*' component={ NotFound } />
         </Route>
       </Router>

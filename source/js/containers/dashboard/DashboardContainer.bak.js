@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Card, CardActions, CardTitle, CardText } from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
@@ -6,7 +6,7 @@ import ContentAdd from 'material-ui/svg-icons/content/add'
 import RaisedButton from 'material-ui/RaisedButton'
 import PgDivider from '../../utils/PgDivider'
 
-export default class PollsContainer extends Component {
+export default class DashboardContainer extends React.Component {
   render() {
     return (
       <div className='container'>

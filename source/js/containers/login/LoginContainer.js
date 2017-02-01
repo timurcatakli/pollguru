@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { TextField } from 'redux-form-material-ui'
@@ -10,9 +10,9 @@ import * as Actions from '../../actions/app'
 import PgDivider from '../../utils/PgDivider'
 
 const propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
-  signInUserAction: PropTypes.func.isRequired,
-  authenticationError: PropTypes.string,
+  handleSubmit: React.PropTypes.func.isRequired,
+  signInUserAction: React.PropTypes.func.isRequired,
+  authenticationError: React.PropTypes.string,
 }
 
 const validate = values => {
@@ -31,7 +31,7 @@ const validate = values => {
   return errors
 }
 
-export class Login extends Component {
+export class LoginContainer extends React.Component {
   handleFormSubmit = (values) => {
     this.props.signInUserAction(values)
   }
@@ -99,7 +99,7 @@ function mapStateToProps(state) {
   }
 }
 
-Login.propTypes = propTypes
+LoginContainer.propTypes = propTypes
 export default connect(mapStateToProps, Actions)(reduxForm(
   {
     form: 'login',
@@ -110,4 +110,4 @@ export default connect(mapStateToProps, Actions)(reduxForm(
     },
     validate,
   }
-)(Login))
+)(LoginContainer))
