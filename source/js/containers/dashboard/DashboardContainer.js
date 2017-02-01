@@ -1,82 +1,29 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { testAction, testAsync } from 'actions/app';
+import React from 'react'
+import { Card, CardActions, CardTitle, CardText } from 'material-ui/Card'
+import FlatButton from 'material-ui/FlatButton'
+import TextField from 'material-ui/TextField'
+import ContentAdd from 'material-ui/svg-icons/content/add'
+import RaisedButton from 'material-ui/RaisedButton'
+import PgDivider from '../../utils/PgDivider'
 
-@connect(state => ({
-  asyncData: state.app.get('asyncData'),
-  asyncError: state.app.get('asyncError'),
-  asyncLoading: state.app.get('asyncLoading'),
-  counter: state.app.get('counter'),
-}))
-export default class DashboardContainer extends Component {
-  static propTypes = {
-    asyncData: PropTypes.string,
-    asyncError: PropTypes.object,
-    asyncLoading: PropTypes.bool,
-    counter: PropTypes.number,
-    // from react-redux connect
-    dispatch: PropTypes.func,
-  }
-
-  constructor() {
-    super();
-
-    this.handleAsyncButtonClick = this.handleAsyncButtonClick.bind(this);
-    this.handleTestButtonClick = this.handleTestButtonClick.bind(this);
-  }
-
-  handleAsyncButtonClick() {
-    const { dispatch } = this.props;
-
-    dispatch(testAsync());
-  }
-
-  handleTestButtonClick() {
-    const { dispatch } = this.props;
-
-    dispatch(testAction());
-  }
-
+export default class DashboardContainer extends React.Component {
   render() {
-    const {
-      asyncData,
-      asyncError,
-      asyncLoading,
-      counter,
-    } = this.props;
-
     return (
-      <div className='Dashboard'>
-        <h2>Examples</h2>
-        <hr />
-        <div>
-          <h3>Synchronous action</h3>
-          <p>{ counter }</p>
-          <button onClick={ this.handleTestButtonClick }>
-            Increase counter
-          </button>
-        </div>
-        <hr />
-        <div>
-          <h3>Async action example</h3>
-          <p>{ asyncData }</p>
-          { asyncLoading && <p>Loading...</p> }
-          { asyncError && <p>Error: { asyncError }</p> }
-          <button
-            disabled={ asyncLoading }
-            onClick={ this.handleAsyncButtonClick }
-          >
-            Get async data
-          </button>
-        </div>
-        <hr />
-        <div>
-          <h3>Background image</h3>
-          <div className='BackgroundImgExample' />
-
-          <h3>Image imported to the component</h3>
+      <div style={ { backgroundColor: '#3b78e7' } }>
+        <div className='home-container pg-flex-baseline'>
+          <div className='col-6-12'>
+            <h1>Meet your new inbox!</h1>
+            <p>
+              Built on everything we learned from Gmail,
+              Inbox is a fresh start that goes beyond email
+              to help you get back to what matters.
+            </p>
+          </div>
+          <div className='col-6-12'>
+            <img src='https://www.google.com/inbox/assets/images/intro/intro-product_2x.png' />
+          </div>
         </div>
       </div>
-    );
+    )
   }
 }

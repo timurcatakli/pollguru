@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export default class Subpage extends Component {
+export default class Subpage extends React.Component {
   render() {
     return (
       <div className='page fullscreen'>

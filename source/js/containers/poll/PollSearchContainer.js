@@ -1,44 +1,60 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
 import { browserHistory } from 'react-router'
 import { Card, CardTitle, CardText } from 'material-ui/Card'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 import PgDivider from '../../utils/PgDivider'
 
-const propTypes = {
-}
+export default class PollsSearchContainer extends React.Component {
+  constructor(props) {
+    super(props)
+    this.handleGo = this.handleGo.bind(this)
+    this.onKeyPress = this.onKeyPress.bind(this)
+  }
 
-class PollSearchContainer extends Component {
+  onKeyPress(event) {
+    const pollId = this.textInput.input.value
+    if (event.charCode === 13) {
+      event.preventDefault()
+      browserHistory.push(`poll/${ pollId }`)
+    }
+  }
+
+  handleGo() {
+    const pollId = this.textInput.input.value
+    if (pollId) {
+      browserHistory.push(`poll/${ pollId }`)
+    }
+  }
+
   render() {
     return (
       <div className='container'>
         <Card>
-          <CardTitle title='Vote For A Poll' subtitle='Card subtitle' />
+          <CardTitle title='Join A Poll' subtitle='Card subtitle' />
           <CardText>
-            <div className='grid'>
-              <PgDivider />
-              <div className='col-6-12 push-2-12'>
+            <div className='grid pg-flex-baseline'>
+              <div className='col-9-12'>
                 <TextField
-                  floatingLabelText='Floating Label Text'
+                  hintText='Hint Text'
+                  floatingLabelText='Enter Poll Number & Hit Go'
+                  ref={ (input) => { this.textInput = input } }
+                  onKeyPress={ this.onKeyPress }
                   fullWidth
                 />
               </div>
               <div className='col-3-12'>
                 <RaisedButton
+                  label='Go'
                   backgroundColor={ '#fdd835' }
-                  label='Sign in'
+                  onTouchTap={ this.handleGo }
                 />
               </div>
             </div>
           </CardText>
-          <PgDivider />
-          <PgDivider />
         </Card>
         <PgDivider />
       </div>
     )
   }
 }
-
-PollSearchContainer.propTypes = propTypes
-export default PollSearchContainer

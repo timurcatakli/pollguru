@@ -1,9 +1,9 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
 import MenuContainer from 'components/Global/MenuContainer'
 
-export default class App extends Component {
+export default class App extends React.Component {
   static propTypes = {
-    children: PropTypes.object,
+    children: React.PropTypes.object,
   }
 
 

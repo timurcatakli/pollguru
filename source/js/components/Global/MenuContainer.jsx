@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import AppBar from 'material-ui/AppBar'
 import FlatButton from 'material-ui/FlatButton'
@@ -18,12 +18,12 @@ import Download from 'material-ui/svg-icons/file/file-download'
 import * as Actions from '../../actions/app'
 
 const propTypes = {
-  signOutUser: PropTypes.func,
-  authenticated: PropTypes.bool,
+  signOutUser: React.PropTypes.func,
+  authenticated: React.PropTypes.bool,
 }
 
 
-export class MenuContainer extends Component {
+export class MenuContainer extends React.Component {
   constructor(props) {
     super(props)
     this.state = { popoverOpen: false }
@@ -144,16 +144,16 @@ export class MenuContainer extends Component {
               primaryText='Create a Poll'
               leftIcon={ <PollIcon /> }
               onTouchTap={ () => {
-                browserHistory.push('/')
+                browserHistory.push('/poll/create')
                 this.handleRequestClose()
               } }
             />
             <Divider />
             <MenuItem
-              primaryText='Polls'
+              primaryText='Join A Poll'
               leftIcon={ <PollIcon /> }
               onTouchTap={ () => {
-                browserHistory.push('/polls')
+                browserHistory.push('/poll')
                 this.handleRequestClose()
               } }
             />

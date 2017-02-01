@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Firebase from 'firebase'
 import ActionGrade from 'material-ui/svg-icons/action/grade'
 import PgDivider from '../../utils/PgDivider'
@@ -7,7 +7,7 @@ const propTypes = {
   params: React.PropTypes.object.isRequired,
 }
 
-export default class PollContainer extends Component {
+export default class PollContainer extends React.Component {
   constructor() {
     super()
     this.state = {
@@ -83,8 +83,13 @@ export default class PollContainer extends Component {
         <PgDivider />
         <PgDivider />
         <PgDivider />
-        <div className='col-6-12 push-3-12'><h1><strong>Oopps!</strong></h1><h2>The poll you are trying to reach does not exist</h2></div>
-        <div className='col-3-12'>&nbsp;</div>
+        <div className='col-2-12 push-3-12'>
+          <img src='https://cdn1.iconfinder.com/data/icons/smallicons-controls/32/614338-.svg-512.png' />
+        </div>
+        <div className='col-4-12'>
+          <h1><strong>Oopps!</strong></h1><h2>The poll you are trying to reach does not exist</h2>
+        </div>
+        <div className='col-5-12'>&nbsp;</div>
       </div>
     )
   }

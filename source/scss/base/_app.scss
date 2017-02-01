@@ -109,6 +109,11 @@ blockquote {
   margin: 2rem;
 }
 
+.home-container {
+  margin: 0 2rem 2rem 2rem;
+  padding: 3rem 0 0 0;
+}
+
 .pg-divider {
   margin-top: 0.6rem;
   margin-bottom: 0.6rem;
@@ -117,7 +122,7 @@ blockquote {
 .pg-flex-baseline {
   display: flex;
   justify-content: space-around;
-  align-items: baseline;
+  align-items: center;
 }
 
 .pg-flex-end {

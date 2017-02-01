@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 import { Card, CardTitle, CardText } from 'material-ui/Card'
@@ -12,11 +12,11 @@ import * as Actions from '../../actions/app'
 import PgDivider from '../../utils/PgDivider'
 
 const propTypes = {
-  fetchPolls: PropTypes.func,
+  fetchPolls: React.PropTypes.func,
   polls: React.PropTypes.object,
 }
 
-class AccountContainer extends Component {
+class AccountContainer extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
