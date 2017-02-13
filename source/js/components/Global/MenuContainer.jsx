@@ -97,7 +97,9 @@ export class MenuContainer extends React.Component {
   renderLoginLink() {
     if (this.props.authenticated) {
       return (
-        <IconButton tooltip='Account Details'>
+        <IconButton
+          onTouchTap={ () => { browserHistory.push('/account') } }
+        >
           <PersonIcon />
         </IconButton>
       )
